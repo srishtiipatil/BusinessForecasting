@@ -1,0 +1,111 @@
+---
+title: "Assignment1_SrishtiPatil"
+output: html_document
+date: "2024-09-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(readxl)
+library(ggplot2)
+library(dplyr)
+
+file_path <- "C:\\Users\\Srishti\\Desktop\\FALL24\\BF\\Typical_Employee_Survey_Data.xlsx"
+data <- read_excel(file_path)
+head(data)
+
+# Adding Headers to all the columns in the Data File
+colnames(data) <- c("Age", "Gender", "SatisfactionArc","JobCharacteristics","YearsOfWorking","PromotionProbablity","DecisionMaking","BudgetaryDecisions","Proud","TurningDownOtherOffer","RelationsBetweenCoworkersAndColleagues")
+print(data)
+
+
+# 5 point Summary and Boxplot
+summary(data)
+
+for (i in 1:ncol(data)) {
+  boxplot(data[[i]], main = paste("Boxplot Of Column", colnames(data[i])), ylab = names(data)[i])
+}
+
+# Converting some columns to factors
+data$Gender <- as.factor(data$Gender)
+data$SatisfactionArc <- as.factor(data$SatisfactionArc)
+data$JobCharacteristics <- as.factor(data$JobCharacteristics)
+data$PromotionProbablity <- as.factor(data$JobCharacteristics)
+data$DecisionMaking <- as.factor(data$DecisionMaking)
+data$BudgetaryDecisions <- as.factor(data$BudgetaryDecisions)
+data$Proud <- as.factor(data$Proud)
+data$TurningDownOtherOffer <- as.factor(data$TurningDownOtherOffer)
+data$RelationsBetweenCoworkersAndColleagues <- as.factor(data$RelationsBetweenCoworkersAndColleagues)
+print(data)
+
+
+# Plotting suitable plots based on column type
+#Plotting Histogram for continuous data
+
+ggplot(data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "yellow", color = "black") +
+  ggtitle("Histogram - Column Age")
+ 
+ggplot(data, aes(x = YearsOfWorking)) +
+  geom_histogram(binwidth = 5, fill = "yellow", color = "black") +
+  ggtitle("Histogram - Column YearsOfWorking")
+ 
+# Plotting Bar Plot for Factor data
+
+ggplot(data, aes(x = Gender)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Gender")
+
+ggplot(data, aes(x = SatisfactionArc)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column SatisfactionArc")
+
+ggplot(data, aes(x = JobCharacteristics)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column JobCharacteristics")
+ 
+ggplot(data, aes(x = PromotionProbablity)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column PromotionProbablity")
+ 
+ggplot(data, aes(x = DecisionMaking)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column DecisionMaking")
+ 
+ggplot(data, aes(x = BudgetaryDecisions)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column BudgetaryDecisions")
+
+ggplot(data, aes(x = Proud)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Proud")
+ 
+ggplot(data, aes(x = RelationsBetweenCoworkersAndColleagues)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column RelationsBetweenCoworkersAndColleagues")
+
+ggplot(data, aes(x = TurningDownOtherOffer)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column TurningDownOtherOffer")
+
+
+# Showing a few relationships between columns
+
+ggplot(data, aes(x = Age, y = Gender)) +
+  geom_point(color = "blue") +
+  ggtitle("Scatter Plot for Column Age vs Column Gender") +
+  xlab("Column Age") +
+  ylab("Column Gender")
+
+ggplot(data, aes(x = Age, y = SatisfactionArc)) +
+  geom_point(color = "blue") +
+  ggtitle("Scatter Plot for Column Age vs Column SatisfactionArc") +
+  xlab("Column Age") +
+  ylab("Column SatisfactionArc")
+
+```
+
